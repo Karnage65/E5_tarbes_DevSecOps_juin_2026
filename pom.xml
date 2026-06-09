@@ -9,7 +9,7 @@
     </parent>
     
     <groupId>com.demo</groupId>
-    <artifactId>web-app</artifactId>
+    <artifactId>e5-web-app</artifactId>
     <version>1.0.0</version>
     
     <properties>
