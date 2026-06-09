@@ -148,8 +148,26 @@ pipeline {
                 bat "docker run -d --name ${APP_NAME} -p 8082:8080 ${DOCKER_IMAGE}:latest"
             }
         }
+    
+        stage('09 - SNYK CONTAINER SCAN') {
+            when {
+                expression {
+                    return params.SKIP_SNYK == false
+                }
+            }
+            steps {
+                echo "Analyse de l'image Docker avec Snyk via archive Docker..."
+                withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
+                    bat """
+                    "%SNYK_EXE%" auth %SNYK_TOKEN%
+                    docker save %DOCKER_IMAGE%:latest -o snyk-image.tar
+                    "%SNYK_EXE%" container test docker-archive:snyk-image.tar ^
+                    --severity-threshold=high
+                    """
+                }
+            }
+        }
     }
-
     /*
     Actions exécutées à la fin du pipeline
     */
