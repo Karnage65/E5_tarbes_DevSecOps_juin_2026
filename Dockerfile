@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # 3. Copier le fichier JAR généré par Maven (dans target/) vers le conteneur
-COPY target/web-app.jar app.jar
+COPY target/e5-web-app.jar app.jar
 
 # 4. Indiquer le port sur lequel l'application écoute à l'intérieur du conteneur
 EXPOSE 8080
