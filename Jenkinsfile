@@ -63,6 +63,23 @@ pipeline {
                 echo "Skip Test : ${params.SKIP_TEST}"
             }
         }
+        stage('02 - CHECK TOOLS') {
+
+            steps {
+
+                bat """
+                echo ===== MAVEN =====
+                mvn -version
+                echo ===== DOCKER =====
+                docker --version
+                echo ===== TRIVY =====
+                "%TRIVY_EXE%" --version
+                echo ===== SNYK =====
+                "%SNYK_EXE%" --version
+                """
+            }
+        }
+
 
         /*
         Récupération du projet depuis ton Github personnalisé
