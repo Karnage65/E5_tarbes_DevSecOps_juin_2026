@@ -41,7 +41,10 @@ pipeline {
         APP_NAME = "e5-web-app"
         DOCKER_IMAGE = "karnage65/e5-web-app"
         // Comme tout est en local natif sur Windows, localhost fonctionne parfaitement
-        SONAR_URL = "http://localhost:9000" 
+        
+        TRIVY_EXE = "C:\\ProgramData\\chocolatey\\bin\\trivy.exe"
+
+        SNYK_EXE = "C:\\ProgramData\\chocolatey\\bin\\snyk.exe"
     }
 
     stages {
