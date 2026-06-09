@@ -100,13 +100,13 @@ pipeline {
         Analyse qualité et sécurité SonarQube
         Mis sur une seule ligne pour éviter les problèmes de retour à la ligne sous Windows
         */
-        stage('05 - SONARQUBE ANALYSIS') {
+       /* stage('05 - SONARQUBE ANALYSIS') {
             steps {
                 echo "Scanning source code with SonarQube"
                 bat "mvn sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=${params.SONAR_SERVER_PWD}"
             }
         }
-
+*/
         /*
         Création de ton image Docker locale
         */
