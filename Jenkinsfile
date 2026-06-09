@@ -98,7 +98,7 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                sh """
+                bat """
                 trivy image --severity HIGH,CRITICAL ${DOCKER_IMAGE}:latest
                 """
             }
