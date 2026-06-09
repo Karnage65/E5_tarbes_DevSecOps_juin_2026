@@ -99,7 +99,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 sh '''
-                trivy image --severity HIGH,CRITICAL myapp:latest
+                trivy image --severity HIGH,CRITICAL ${DOCKER_IMAGE}:latest
                 '''
             }
         }
