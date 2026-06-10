@@ -84,7 +84,7 @@ pipeline {
         /*
         Récupération du projet depuis ton Github personnalisé
         */
-        stage('02 - CHECKOUT GITHUB') {
+        stage('03 - CHECKOUT GITHUB') {
             steps {
                 echo "Downloading source code from your repository..."
                 git branch: "${params.BRANCH}", url: 'https://github.com/Karnage65/E5_tarbes_DevSecOps_juin_2026.git'
@@ -94,7 +94,7 @@ pipeline {
         /*
         Compilation de l'application avec Maven (Syntaxe Windows 'bat')
         */
-        stage('03 - BUILD APPLICATION') {
+        stage('04 - BUILD APPLICATION') {
             steps {
                 echo "Building Application"
                 bat "mvn clean package"
@@ -104,7 +104,7 @@ pipeline {
         /*
         Tests unitaires (Le stage sera ignoré si SKIP_TEST=true)
         */
-        stage('04 - RUN TESTS') {
+        stage('05 - RUN TESTS') {
             when {
                 expression {
                     return params.SKIP_TEST == false
@@ -116,7 +116,7 @@ pipeline {
             }
         }
 
-        stage('Security Scan') {
+        stage('06 - Security Scan') {
             steps {
                 bat """
                 trivy image --severity HIGH,CRITICAL ${DOCKER_IMAGE}:latest
@@ -126,7 +126,7 @@ pipeline {
         /*
         Création de ton image Docker locale
         */
-        stage('06 - DOCKER BUILD') {
+        stage('07 - DOCKER BUILD') {
             steps {
                 echo "Creating Docker image"
                 bat "docker build -t ${DOCKER_IMAGE}:latest ."
@@ -136,7 +136,7 @@ pipeline {
         /*
         Déploiement sur le port 8082 (pour ne pas bloquer Jenkins sur le 8080)
         */
-        stage('07 - DEPLOY') {
+        stage('08 - DEPLOY') {
             steps {
                 echo "Deploying Application"
                 
